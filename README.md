@@ -1,0 +1,2 @@
+# swiftCode
+learning Swift programing
