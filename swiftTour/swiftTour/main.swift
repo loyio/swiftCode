@@ -7,9 +7,12 @@
 
 import Foundation
 
-let newHello = Dog()
 
-newHello.bark()
+bark()
+
+print()
+
+whileTest()
 
 print("Hello, World!")
 

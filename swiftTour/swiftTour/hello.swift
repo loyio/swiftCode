@@ -7,11 +7,18 @@
 
 import Foundation
 
-class Dog{
-    func bark() {
-        print("woof")
-        for i in [1,2,3] {
-            print(i)
-        }
+
+func bark() {
+    print("woof")
+    for i in [1,2,3] {
+        print(i)
+    }
+}
+
+func whileTest(){
+    var i = 1
+    while i < 10 {
+        print(i)
+        i += 1
     }
 }
