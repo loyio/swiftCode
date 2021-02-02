@@ -24,7 +24,7 @@
                         </userGuides>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OaT-XZ-Ec3">
-                                <rect key="frame" x="179.66666666666666" y="419" width="69" height="88.333333333333314"/>
+                                <rect key="frame" x="179.66666666666666" y="419" width="69" height="88"/>
                                 <color key="backgroundColor" red="1" green="0.39691370654730129" blue="0.034630771398079574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -42,10 +42,18 @@
                                     <action selector="showMessageWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHW-Fl-veg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Auto Layout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FE-Ca-j4J">
+                                <rect key="frame" x="222" y="841" width="186" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4FE-Ca-j4J" secondAttribute="bottom" constant="30" id="SFP-UO-Vxz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4FE-Ca-j4J" secondAttribute="trailing" constant="20" id="WsG-br-tgy"/>
                             <constraint firstItem="OaT-XZ-Ec3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="smI-u5-TMA"/>
                             <constraint firstItem="OaT-XZ-Ec3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tuI-mD-KtX"/>
                         </constraints>
