@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.textLabel?.text = restaurantNames[indexPath.row]
         
+        cell.imageView?.image = UIImage(named: "restaurant")
+        
         return cell
     }
     
@@ -27,6 +29,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
 
 
