@@ -9,9 +9,29 @@ import UIKit
 
 class RestaurantTableViewController: UITableViewController {
     
-    var restaurantNames = ["Cafe Deadend", "Homei", "Teakha", "Cafe Loisl", "Petite Oyster", "For Kee Restaurant", "Po's Atelier", "Bourke Street Bakery", "Haigh's Chocolate", "Palomino Espresso", "Upstate", "Traif", "Graham Avenue Meats", "Waffle & Wolf", "Five Leaves", "Cafe Lore", "Confessional","Barrafina", "Donostia", "Royal Oak", "CASK Pub and Kitchen"]
-    
-    var restaurantImages = ["cafedeadend", "homei", "teakha", "cafeloisl", "petiteoyster", "forkee", "posatelier", "bourkestreetbakery", "haigh", "palomino", "upstate", "traif", "graham", "waffleandwolf", "fiveleaves", "cafelore", "confessional", "barrafina", "donostia", "royaloak", "cask"]
+    var restaurants:[Restaurant] = [
+        Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location: "Shanghai", image: "cafedeadend", isFavorite: false),
+        Restaurant(name: "Homei", type: "Cafe", location: "Beijing", image: "homei", isFavorite: false),
+        Restaurant(name: "Teakha", type: "Tea House", location: "London", image: "teakha", isFavorite: false),
+        Restaurant(name: "Cafe Loisl", type: "Austrian Causual Drink", location: "New York", image: "cafeloisl", isFavorite: false),
+        Restaurant(name: "Petite Oyster", type: "French", location: "Paris", image: "petiteoyster", isFavorite: false),
+        Restaurant(name: "For Kee Restaurant", type: "Bakery", location: "Berlin", image: "forkee", isFavorite: false),
+        Restaurant(name: "Po's Atelier", type: "Bakery", location: "Tokyo", image: "posatelier", isFavorite: false),
+        Restaurant(name: "Bourke Street Bakery", type: "Chocolate", location: "Moscow", image: "bourkestreetbakery", isFavorite: false),
+        Restaurant(name: "Haigh's Chocolate", type: "Cafe", location: "Los Angeles", image: "haigh", isFavorite: false),
+        Restaurant(name: "Palomino Espresso", type: "American Seafood", location: "Shanghai", image: "palomino", isFavorite: false),
+        Restaurant(name: "Upstate", type: "American", location: "Shanghai", image: "Beijing", isFavorite: false),
+        Restaurant(name: "Traif", type: "American", location: "Shanghai", image: "London", isFavorite: false),
+        Restaurant(name: "Graham Avenue Meats", type: "Breakfast & Brunch", location: "New York", image: "graham", isFavorite: false),
+        Restaurant(name: "Waffle & Wolf", type: "Coffee & Tea", location: "Paris", image: "waffleandwolf", isFavorite: false),
+        Restaurant(name: "Five Leaves", type: "Coffee & Tea", location: "Berlin", image: "fiveleaves", isFavorite: false),
+        Restaurant(name: "Cafe Lore", type: "Latin American", location: "Tokyo", image: "cafelore", isFavorite: false),
+        Restaurant(name: "Confessional", type: "Spanish", location: "Moscow", image: "confessional", isFavorite: false),
+        Restaurant(name: "Barrafina", type: "Spanish", location: "Los Angeles", image: "barrafina", isFavorite: false),
+        Restaurant(name: "Donostia", type: "Spanish", location: "Sydney", image: "donostia", isFavorite: false),
+        Restaurant(name: "Royal Oak", type: "British", location: "Macao", image: "royaloak", isFavorite: false),
+        Restaurant(name: "CASK Pub and Kitchen", type: "Thai", location: "Singapore City", image: "cask", isFavorite: false)
+    ]
     
     lazy var dataSource = configureDataSource()
     
@@ -19,21 +39,17 @@ class RestaurantTableViewController: UITableViewController {
         case all
     }
     
-    var restaurantIsFavorites = Array(repeating: false, count: 21)
-    
-    func configureDataSource() -> UITableViewDiffableDataSource<Section, String>{
+    func configureDataSource() -> UITableViewDiffableDataSource<Section, Restaurant>{
         let cellIdentifier = "favoritecell"
         
-        let dataSource = UITableViewDiffableDataSource<Section, String>(
-            tableView: tableView, cellProvider: {tableView, IndexPath, restaurantName in
+        let dataSource = UITableViewDiffableDataSource<Section, Restaurant>(
+            tableView: tableView, cellProvider: {tableView, IndexPath, restaurant in
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: IndexPath) as! RestaurantTableViewCell
-                cell.nameLabel.text = restaurantName
-                cell.thumbnailImageVIew.image = UIImage(named: self.restaurantImages[IndexPath.row])
-                if self.restaurantIsFavorites[IndexPath.row]{
-                    cell.accessoryType = .checkmark
-                }else{
-                    cell.accessoryType = .none
-                }
+                cell.nameLabel.text = restaurant.name
+                cell.locationLabel.text = restaurant.location
+                cell.typelabel.text = restaurant.type
+                cell.thumbnailImageVIew.image = UIImage(named: restaurant.image)
+                cell.favoriteImageView.isHidden = restaurant.isFavorite ? false : true
                 
                 return cell
             }
@@ -79,13 +95,13 @@ class RestaurantTableViewController: UITableViewController {
         let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler: reserveActionHandler)
         optionMenu.addAction(reserveAction)
         
-        let favoriteAction = UIAlertAction(title: "Mark as favorite", style: .default, handler: {
+        let favoriteActionTitle = self.restaurants[indexPath.row].isFavorite ? "Remove from favorites" : "Mark as favorite"
+        let favoriteAction = UIAlertAction(title: favoriteActionTitle, style: .default, handler: {
             (action:UIAlertAction!) -> Void in
             
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = .checkmark
-            cell?.tintColor = .systemYellow
-            self.restaurantIsFavorites[indexPath.row] = true
+            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
+            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
         })
         optionMenu.addAction(favoriteAction)
         
