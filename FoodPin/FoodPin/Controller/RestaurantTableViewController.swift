@@ -39,6 +39,24 @@ class RestaurantTableViewController: UITableViewController {
         case all
     }
     
+    // MARK: - View controller life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.separatorStyle = .none
+        
+        tableView.dataSource = dataSource
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
+        snapshot.appendSections([.all])
+        snapshot.appendItems(restaurants, toSection: .all)
+        
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    // MARK: - UITableView Diffable Data Source
+    
     func configureDataSource() -> UITableViewDiffableDataSource<Section, Restaurant>{
         let cellIdentifier = "favoritecell"
         
@@ -47,7 +65,7 @@ class RestaurantTableViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: IndexPath) as! RestaurantTableViewCell
                 cell.nameLabel.text = restaurant.name
                 cell.locationLabel.text = restaurant.location
-                cell.typelabel.text = restaurant.type
+                cell.typeLabel.text = restaurant.type
                 cell.thumbnailImageVIew.image = UIImage(named: restaurant.image)
                 cell.favoriteImageView.isHidden = restaurant.isFavorite ? false : true
                 
@@ -58,19 +76,7 @@ class RestaurantTableViewController: UITableViewController {
         return dataSource
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        tableView.separatorStyle = .none
-        
-        tableView.dataSource = dataSource
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(restaurantNames, toSection: .all)
-        
-        dataSource.apply(snapshot, animatingDifferences: false)
-    }
+    // MARK: - UITableViewDelegate Protocol
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
