@@ -35,9 +35,6 @@ class RestaurantTableViewController: UITableViewController {
     
     lazy var dataSource = configureDataSource()
     
-    enum Section{
-        case all
-    }
     
     // MARK: - View controller life cycle
     
@@ -60,7 +57,7 @@ class RestaurantTableViewController: UITableViewController {
     func configureDataSource() -> UITableViewDiffableDataSource<Section, Restaurant>{
         let cellIdentifier = "favoritecell"
         
-        let dataSource = UITableViewDiffableDataSource<Section, Restaurant>(
+        let dataSource = RestaurantDiffableDataSource(
             tableView: tableView, cellProvider: {tableView, IndexPath, restaurant in
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: IndexPath) as! RestaurantTableViewCell
                 cell.nameLabel.text = restaurant.name
