@@ -114,7 +114,7 @@ class RestaurantTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    // MARK: - UITableView Swipe Action
+    // MARK: - UITableView trailing Swipe Action
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let restaurant = self.dataSource.itemIdentifier(for: indexPath)
@@ -161,6 +161,26 @@ class RestaurantTableViewController: UITableViewController {
         shareAction.image = UIImage(systemName: "square.and.arrow.up")
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        
+        return swipeConfiguration
+    }
+    
+    // MARK: - UITableView leading Swipe Action
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let favoriteAction = UIContextualAction(style: .destructive, title: ""){ (action, sourceView, completionHandler) in
+            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
+            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
+            
+            completionHandler(true)
+        }
+        
+        favoriteAction.backgroundColor = UIColor.systemYellow
+        favoriteAction.image = UIImage(systemName: self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [favoriteAction])
         
         return swipeConfiguration
     }
