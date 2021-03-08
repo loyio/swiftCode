@@ -2,7 +2,7 @@
 //  RestaurantDiffableDataSource.swift
 //  FoodPin
 //
-//  Created by Simon Ng on 20/10/2020.
+//  Created by Loyio on 2/21/21.
 //
 
 import UIKit
@@ -12,9 +12,9 @@ enum Section {
 }
 
 class RestaurantDiffableDataSource: UITableViewDiffableDataSource<Section, Restaurant> {
-
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    
+    
 }
