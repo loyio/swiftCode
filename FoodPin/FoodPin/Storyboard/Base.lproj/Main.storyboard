@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4DR-Ig-EX6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VZL-XH-9mn">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Restaurant Table View Controller-->
+        <!--FoodPin-->
         <scene sceneID="z4I-US-Ple">
             <objects>
                 <tableViewController id="4DR-Ig-EX6" customClass="RestaurantTableViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,6 +77,7 @@
                                     <outlet property="nameLabel" destination="FCC-dO-1fL" id="MbS-Nl-E8K"/>
                                     <outlet property="thumbnailImageVIew" destination="DKr-gD-QEE" id="UJb-TH-eg2"/>
                                     <outlet property="typeLabel" destination="I8k-vk-gJb" id="cej-eV-Tyb"/>
+                                    <segue destination="I0G-LF-dZV" kind="show" id="k4s-LP-dPM"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritecell" id="lo3-9q-LpQ" customClass="RestaurantTableViewCell" customModule="FoodPin" customModuleProvider="target">
@@ -152,6 +154,7 @@
                                     <outlet property="nameLabel" destination="eun-uf-fW9" id="2IS-Uh-ff7"/>
                                     <outlet property="thumbnailImageVIew" destination="iKK-aW-HJg" id="UdA-JW-T7w"/>
                                     <outlet property="typeLabel" destination="nfM-fU-hem" id="J5l-8T-UoW"/>
+                                    <segue destination="I0G-LF-dZV" kind="show" id="HqJ-mm-12E"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -160,12 +163,61 @@
                             <outlet property="delegate" destination="4DR-Ig-EX6" id="DJN-Gb-IK5"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="FoodPin" id="ACA-SQ-Xbm"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TgV-js-xj4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-333" y="124"/>
+            <point key="canvasLocation" x="566.35514018691583" y="123.75809935205184"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tKh-Zb-WSl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VZL-XH-9mn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pTL-Ef-T9E">
+                        <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4DR-Ig-EX6" kind="relationship" relationship="rootViewController" id="Igd-Xt-pqn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s3O-I4-a8o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333.64485981308411" y="123.75809935205184"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="FSi-Mc-cJf">
+            <objects>
+                <viewController id="I0G-LF-dZV" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5ef-5B-19f">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPE-q9-e1T">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bJE-oz-8yt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rPE-q9-e1T" firstAttribute="top" secondItem="5ef-5B-19f" secondAttribute="top" id="1BR-2t-jKu"/>
+                            <constraint firstItem="rPE-q9-e1T" firstAttribute="leading" secondItem="bJE-oz-8yt" secondAttribute="leading" id="Xnx-ah-BqN"/>
+                            <constraint firstItem="rPE-q9-e1T" firstAttribute="trailing" secondItem="bJE-oz-8yt" secondAttribute="trailing" id="pAf-ZA-jv5"/>
+                            <constraint firstAttribute="bottom" secondItem="rPE-q9-e1T" secondAttribute="bottom" id="qpm-o8-eXF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2vI-Rw-cJn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AV8-UD-kOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="658.87850467289718" y="-547.51619870410366"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="k4s-LP-dPM"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
